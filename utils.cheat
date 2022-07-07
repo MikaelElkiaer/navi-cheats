@@ -1,0 +1,19 @@
+% utilities, common
+
+# Paste from clipboard
+$ clipboard: xsel -o -b
+
+% utilities
+@ utilities, common
+
+# Internet speed test via fast.com
+docker run --rm myoung34/fast-cli ./node_modules/.bin/fast -u
+
+# Hash with sha256 and base64 encode
+echo -n <clipboard> | openssl dgst -binary -sha256 | openssl base64
+
+# Base64 encode without padding
+echo -n <clipboard> | base64 --wrap=0
+
+# Strip ANSI escape sequences
+sed 's/\x1b\[[0-9;]*[a-zA-Z]//g'
