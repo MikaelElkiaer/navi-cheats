@@ -1,0 +1,6 @@
+% github-cli, issues
+
+# View issue
+gh issue view --comments <issue>
+
+$ issue: gh issue list | yank -g '^[a-f0-9]+'

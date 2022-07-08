@@ -1,0 +1,8 @@
+% aws
+
+# Get current identity
+aws sts get-caller-identity
+
+# Log in via sso, without browser
+aws sso login --no-browser
+
