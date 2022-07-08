@@ -7,6 +7,8 @@ $ commit-fzf: git flog --all \
 		| grep -oEi '[0-9a-f]{7,8}' \
 		| head -1
 
+$ branch-fzf: git branch | fzf
+
 % git
 @ git, common
 
@@ -15,3 +17,9 @@ git rebase -i <commit-fzf>
 
 # Interactive fixup
 git commit --fixup=<commit-fzf>
+
+# Interactive revert
+git revert <commit-fzf>
+
+# Switch branch
+git switch <branch-fzf>
