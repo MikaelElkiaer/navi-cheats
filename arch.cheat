@@ -1,0 +1,4 @@
+% arch, pacman
+
+# Update all
+sudo pacman -Sy archlinux-keyring endeavouros-keyring && yay -Syu
