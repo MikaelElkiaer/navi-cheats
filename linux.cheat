@@ -1,0 +1,11 @@
+% linux, permissions
+
+# set ssh private key chmod
+chmod 700 <file>
+
+$ file: fzf
+
+% linux, user
+
+# reset user faillock status
+faillock --user <user> --reset
