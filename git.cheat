@@ -9,6 +9,7 @@ $ commit-fzf: git flog --all \
 
 $ branch-fzf: git branch | fzf
 
+
 % git
 @ git, common
 
@@ -23,3 +24,11 @@ git revert <commit-fzf>
 
 # Switch branch
 git switch <branch-fzf>
+
+
+% git, gitignore
+
+# Populate gitignore file from from GitHub template
+gibo dump <gibo-list-fzf> > .gitignore
+
+$ gibo-list-fzf: gibo list | fzf
