@@ -9,6 +9,9 @@ $ clipboard: xsel -o -b
 # Internet speed test via fast.com
 docker run --rm myoung34/fast-cli ./node_modules/.bin/fast -u
 
+# Internet speed test via speedtest.net
+docker run --rm moutten/speedtest-cli --accept-gdpr
+
 # Hash with sha256 and base64 encode
 echo -n <clipboard> | openssl dgst -binary -sha256 | openssl base64
 
