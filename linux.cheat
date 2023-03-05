@@ -9,3 +9,8 @@ $ file: fzf
 
 # reset user faillock status
 faillock --user <user> --reset
+
+% linux, packages
+
+# grub update, upgrade, kernel
+sudo grub-install /dev/sda && sudo grub-mkconfig -o /boot/grub/grub.cfg
