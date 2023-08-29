@@ -25,6 +25,8 @@ git revert <commit-fzf>
 # Switch branch
 git switch <branch-fzf>
 
+# See logs - including deleted
+git log --all --full-history -- <read>
 
 % git, gitignore
 
