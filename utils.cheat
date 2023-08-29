@@ -20,3 +20,6 @@ echo -n <clipboard> | base64 --wrap=0
 
 # Strip ANSI escape sequences
 sed 's/\x1b\[[0-9;]*[a-zA-Z]//g'
+
+# Log into Bitwarden CLI
+export BW_SESSION=$(bw unlock --raw)
