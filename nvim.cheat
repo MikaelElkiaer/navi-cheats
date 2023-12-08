@@ -1,0 +1,4 @@
+% nvim
+
+# Update plugins
+nvim --headless "+Lazy! update" +qa
