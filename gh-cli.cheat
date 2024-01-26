@@ -4,3 +4,6 @@
 gh issue view --comments <issue>
 
 $ issue: gh issue list | yank -g '^[a-f0-9]+'
+
+# Rebase all dependabot PRs
+gh pr list --json number,author --jq '. | map(select(.author.login=="app/dependabot")) | .[].number' | while read -r PR; do gh pr comment $PR --body '@dependabot rebase'; done
