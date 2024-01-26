@@ -1,4 +1,7 @@
-% arch, pacman
+% arch, pacman, eos
 
 # Update all
 sudo pacman -Sy archlinux-keyring endeavouros-keyring && yay -Syu
+
+# Check if reboot needed
+if [ $(date +%s -d "$(ls --format=long --full-time /var/log/eos-reboot-required-trigger.log | awk '{print $6 " " $7 " " $8}')") -gt $(date +%s -d "$(uptime --since)") ]; then echo 1; else echo 0; fi
