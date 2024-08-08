@@ -14,3 +14,6 @@ faillock --user <user> --reset
 
 # grub update, upgrade, kernel
 sudo grub-install /dev/sda && sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+# list terminal colors
+for i in {0..16}; do printf "\x1b[38;5;%smcolour%s\n" "${i}" "${i}"; done
