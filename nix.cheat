@@ -1,0 +1,7 @@
+% nix
+
+# Delete old generations, I think
+nix-collect-garbage --delete-old
+
+# Delete old objects, I think
+nix-store --gc
