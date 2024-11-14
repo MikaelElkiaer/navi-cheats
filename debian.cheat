@@ -1,0 +1,4 @@
+% debian
+
+# Check if reboot is required
+[ -f /var/run/reboot-required ] && echo true || echo false | xargs echo "Reboot is required:"
