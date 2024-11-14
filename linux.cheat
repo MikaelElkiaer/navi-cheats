@@ -1,9 +1,8 @@
 % linux, permissions
+@ utilities, common
 
 # set ssh private key chmod
 chmod 700 <file>
-
-$ file: fzf
 
 % linux, user
 

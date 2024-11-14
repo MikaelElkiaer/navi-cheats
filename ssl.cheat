@@ -1,0 +1,8 @@
+% ssl
+@ utilities, common
+
+# Inspect certificate
+openssl x509 -in <file> -text -noout
+
+# Hash with sha256 and base64 encode
+echo -n <clipboard> | openssl dgst -binary -sha256 | openssl base64
