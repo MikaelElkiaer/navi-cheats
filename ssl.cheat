@@ -6,3 +6,9 @@ openssl x509 -in <file> -text -noout
 
 # Hash with sha256 and base64 encode
 echo -n <clipboard> | openssl dgst -binary -sha256 | openssl base64
+
+# Convert p7b
+openssl pkcs7 -outform PEM -in <file> -print_certs
+
+# Convert p7b - DER format
+openssl pkcs7 -inform DER -outform PEM -in <file> -print_certs
