@@ -1,0 +1,4 @@
+% docker compose
+
+# Clean hard
+docker compose down --remove-orphans --timeout 0 --volumes
