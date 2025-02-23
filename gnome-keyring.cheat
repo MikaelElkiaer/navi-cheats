@@ -1,0 +1,7 @@
+% gnome-keyring, libsecret
+
+# Unlock keyring
+read -rsp "Keyring password: " keyring_password; echo -n $keyring_password | gnome-keyring-daemon --components=secrets --daemonize --replace --unlock
+
+# Lock keyring
+pkill -u "$(whoami)" -f gnome-keyring-daemon
