@@ -3,6 +3,6 @@
 # Get current identity
 aws sts get-caller-identity
 
-# Log in via sso, without browser
-aws sso login --no-browser
+# Log in via sso, without browser, using device code
+aws sso login --no-browser --use-device-code
 
