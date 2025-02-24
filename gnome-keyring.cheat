@@ -5,3 +5,6 @@ read -rsp "Keyring password: " keyring_password; echo -n $keyring_password | gno
 
 # Lock keyring
 pkill -u "$(whoami)" -f gnome-keyring-daemon
+
+# Check if keyring locked
+busctl --json=short --user get-property org.freedesktop.secrets /org/freedesktop/secrets/collection/login org.freedesktop.Secret.Collection Locked | jq '.data'
