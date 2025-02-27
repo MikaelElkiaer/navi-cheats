@@ -7,3 +7,8 @@ $ issue: gh issue list | yank -g '^[a-f0-9]+'
 
 # Rebase all dependabot PRs
 gh pr list --json number,author --jq '. | map(select(.author.login=="app/dependabot")) | .[].number' | while read -r PR; do gh pr comment $PR --body '@dependabot rebase'; done
+
+# See commit status
+gh api /repos/{owner}/{repo}/commits/<ref>/status
+
+$ ref: git show-ref | fzf | awk '{print $1}'
