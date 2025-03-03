@@ -1,10 +1,7 @@
 % nix
 
-# Delete old generations, I think
+# Collect garbage
 nix-collect-garbage --delete-old
-
-# Delete old objects, I think
-nix-store --gc
 
 # Search packages
 nix search nixpkgs 
