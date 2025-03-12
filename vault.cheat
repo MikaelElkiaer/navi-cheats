@@ -1,4 +1,6 @@
 % vault
 
-# Log in
-vault login
+# Log in to Vault via token
+echo "1. Go to ${VAULT_ADDR:-Vault UI}
+2. 'Copy token'
+3. Paste"; vault login
