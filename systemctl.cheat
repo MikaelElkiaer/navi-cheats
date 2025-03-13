@@ -1,0 +1,4 @@
+% systemctl, systemd
+
+# Import environment for systemd user services
+systemctl --user import-environment 
