@@ -19,3 +19,6 @@ for i in {0..16}; do printf "\x1b[38;5;%smcolour%s\n" "${i}" "${i}"; done
 
 # generate random characters - useful for passwords
 openssl rand -base64 15
+
+# generate random UUID (GUID)
+cat /proc/sys/kernel/random/uuid
