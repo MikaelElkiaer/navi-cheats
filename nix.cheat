@@ -8,3 +8,6 @@ nix search nixpkgs --offline
 
 # Update package cache
 nix-channel --update
+
+# Open home-manager manpage
+man home-configuration.nix
