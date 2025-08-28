@@ -1,0 +1,6 @@
+% lastpass, lastpass-cli, lpass
+
+# Log in to lastpass
+lpass login --trust <username>
+
+$ username: cat ~/.lpass/username
