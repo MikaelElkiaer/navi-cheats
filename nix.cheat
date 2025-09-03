@@ -6,6 +6,9 @@ nix-collect-garbage --delete-old
 # Search packages
 nix search nixpkgs --offline 
 
+# Search packages by binary
+, --print-packages 
+
 # Update package cache
 nix-channel --update
 
