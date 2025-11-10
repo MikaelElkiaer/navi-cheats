@@ -22,3 +22,9 @@ openssl rand -base64 15
 
 # generate random UUID (GUID)
 cat /proc/sys/kernel/random/uuid
+
+# storage usage - inodes
+df -hi
+
+# find high counts of inodes
+sudo find . -xdev -type f | cut -d "/" -f 2 | sort | uniq -c | sort -n
