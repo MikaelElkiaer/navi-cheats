@@ -18,7 +18,7 @@ sudo grub-install /dev/sda && sudo grub-mkconfig -o /boot/grub/grub.cfg
 for i in {0..16}; do printf "\x1b[38;5;%smcolour%s\n" "${i}" "${i}"; done
 
 # generate random characters - useful for passwords
-openssl rand -base64 15
+openssl rand -base64 15 | xargs echo -n
 
 # generate random UUID (GUID)
 cat /proc/sys/kernel/random/uuid
