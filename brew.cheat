@@ -1,0 +1,4 @@
+% brew
+
+# Upgrade Homebrew installations - with GitHub token for private repositories
+HOMEBREW_GITHUB_API_TOKEN=$(gh auth token) brew upgrade
