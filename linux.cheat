@@ -28,3 +28,6 @@ df -hi
 
 # find high counts of inodes
 sudo find . -xdev -type f | cut -d "/" -f 2 | sort | uniq -c | sort -n
+
+# Get current time as ISO-8601 UTC
+date -u +%Y-%m-%dT%H:%M:%S.%NZ
