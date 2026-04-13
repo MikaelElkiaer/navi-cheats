@@ -1,0 +1,58 @@
+% k8s, kubernetes
+
+# Check folder for Certificates affacted by 1.18 upgrade
+yq eval-all '[.] | filter(has("kind") and .kind=="Certificate" and (.spec.revisionHistoryLimit==null or .spec.privateKey.rotationPolicy==null)) |
+map({
+  "metadata": {
+    "name": .metadata.name,
+    "namespace": .metadata.namespace
+  },
+  "spec": {
+    "revisitonHistoryLimit": .spec.revisionHistoryLimit,
+    "privateKey": {
+      "rotationPolicy": .spec.privateKey.rotationPolicy
+    }
+  }
+})' **/*.yaml
+
+# Check cluster for Certificates affacted by 1.18 upgrade
+kubectl get certificates.cert-manager.io --all-namespaces --output=json | jq '
+.items[] |
+select(
+    .kind == "Certificate" and
+    (
+        .spec.revisionHistoryLimit == null or
+        .spec.privateKey.rotationPolicy == null
+    )
+) |
+{
+  metadata: {
+    name: .metadata.name,
+    namespace: .metadata.namespace
+  },
+  spec: {
+    revisitonHistoryLimit: .spec.revisionHistoryLimit,
+    privateKey: {
+      rotationPolicy: .spec.privateKey.rotationPolicy
+    }
+  }
+}
+'
+
+# Diff cert-manager v1.18.2 upgrade (set namespace)
+helm diff upgrade cert-manager cert-manager \
+  --color \
+  --dry-run=server \
+  --normalize-manifests \
+  --output=dyff \
+  --repo=https://charts.jetstack.io \
+  --version=v1.18.2 \
+  --suppress-output-line-regex 'app\.kubernetes\.io' \
+  --suppress-output-line-regex 'helm\.sh' \
+  --suppress-output-line-regex 'helm\.toolkit\.fluxcd\.io'
+
+# Check cluster for use of `.spec.providder` in OCIRepository and ImageRepository affected by 2.6 upgrade
+kubectl get ocirepositories.source.toolkit.fluxcd.io -A -o json | jq '.items | map(select(.spec.provider != null and .spec.provider!="generic"))'
+
+# Manually prune no longer managed resources
+combine <(k get -A <kind> --selector 'kustomize.toolkit.fluxcd.io/namespace=<namespace>,kustomize.toolkit.fluxcd.io/name=<kustomization>' -o yaml | yq '.items | map("\(.metadata.namespace)_\(.metadata.name)_\(.apiVersion | sub(\"/(.*)\", \"\"))_\(.kind)")[]' | sort) not <(k get kustomizations.kustomize.toolkit.fluxcd.io -n <namespace> <kustomization> -o yaml | yq '.status.inventory.entries[].id' | sort) | while read -r R; do IFS='_' read -r NS N _ K <<<"$R"; k delete -n $NS $K $N; done
