@@ -1,0 +1,13 @@
+% yaml, yq
+
+# Show only non-duplicated values between a target and base yaml file
+# - pipe into sponge to overwrite the target file with the diff: `| , sponge <target>`
+yq eval-all '
+  select(fileIndex == 1) as $base | 
+  select(fileIndex == 0) | 
+  del(.. | . as $node | path as $p | select($node == ($base | .. | select(path | join(".") == ($p | join(".")))))) | 
+  del(.. | select(kind == "map" and length == 0))
+' <target> <base>
+
+$ base: fzf
+$ target: fzf
