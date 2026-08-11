@@ -1,0 +1,5 @@
+% flux, kubernetes
+
+# This command will download the artifact from a GitRepository resource in a Kubernetes cluster using Flux.
+# It sets up port forwarding to the source-controller service, retrieves the artifact URL from the specified GitRepository resource, and then downloads and extracts the artifact.
+kubectl port-forward -n <flux-namespace> svc/source-controller 9090:80 & PF_PID=$!; sleep 1; curl -s $(kubectl get gitrepository -n <resource-namespace> <resource-name> -o jsonpath='{.status.artifact.url}' | sed 's/source-controller.flux-system.svc.cluster.local./localhost:9090/') | tar -xzf -; kill $PF_PID
