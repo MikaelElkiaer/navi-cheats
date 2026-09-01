@@ -56,3 +56,6 @@ kubectl get ocirepositories.source.toolkit.fluxcd.io -A -o json | jq '.items | m
 
 # Manually prune no longer managed resources
 combine <(k get -A <kind> --selector 'kustomize.toolkit.fluxcd.io/namespace=<namespace>,kustomize.toolkit.fluxcd.io/name=<kustomization>' -o yaml | yq '.items | map("\(.metadata.namespace)_\(.metadata.name)_\(.apiVersion | sub(\"/(.*)\", \"\"))_\(.kind)")[]' | sort) not <(k get kustomizations.kustomize.toolkit.fluxcd.io -n <namespace> <kustomization> -o yaml | yq '.status.inventory.entries[].id' | sort) | while read -r R; do IFS='_' read -r NS N _ K <<<"$R"; k delete -n $NS $K $N; done
+
+# Resize pod resources
+kubectl patch pod -n <namespace> <pod> --patch='{"spec":{"containers":[{"name":"<container>","resources":{"requests":{"memory":"<limit>"},"limits":{"memory":"<limit>"}}}]}}' --subresource=resize
